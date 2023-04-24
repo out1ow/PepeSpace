@@ -19,4 +19,6 @@ class Users(SqlAlchemyBase):
                                      default=datetime.datetime.now)
     credits = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     resources = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    exp = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    level = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     planets = orm.relationship("Planets", back_populates='user')

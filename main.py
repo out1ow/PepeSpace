@@ -128,6 +128,8 @@ async def profile(update, context):
                                              caption=f'<b>Имя</b>: {user.name}\n'
                                                      f'<b>Планета</b>: {user.chat_id}\n'
                                                      f'<b>Колония</b>: {planet.name}\n'
+                                                     f'<b>Ранг</b>: {user.level}\n'
+                                                     f'<b>Опыт</b>: {user.exp}\n'
                                                      f'<b>Кредиты</b>: {user.credits}\n'
                                                      f'<b>Ресурсы</b>: {user.resources}\n'
                                                      f'<b>Заводы</b>: {planet.fabrics}\n'
@@ -137,6 +139,8 @@ async def profile(update, context):
             await update.message.reply_text(f'<b>Имя</b>: {user.name}\n'
                                             f'<b>Планета</b>: {user.chat_id}\n'
                                             f'<b>Колония</b>: {planet.name}\n'
+                                            f'<b>Ранг</b>: {user.level}\n'
+                                            f'<b>Опыт</b>: {user.exp}\n'
                                             f'<b>Кредиты</b>: {user.credits}\n'
                                             f'<b>Ресурсы</b>: {user.resources}\n'
                                             f'<b>Заводы</b>: {planet.fabrics}\n'
@@ -244,6 +248,9 @@ async def return_ships(context):
     planet.available_ships = planet.ships
     user.credits += planet.ships * 10
     user.resources += planet.ships * 10
+    user.exp += 10
+    if user.exp >= (user.level * 100):
+        user.level += 1
     db_sess.commit()
 
     await context.bot.send_message(chat_id, text='Корабли вернулись')
