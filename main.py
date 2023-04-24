@@ -222,7 +222,7 @@ async def expedition(update, context):
                                             reply_markup=markup)
             return
 
-        time = 900  # 15 минут
+        time = 180  # 3 минут
         chat_id = update.effective_message.chat_id
         job_removed = remove_job_if_exists(str(chat_id), context)
         context.job_queue.run_once(return_ships, time, chat_id=chat_id, name=str(chat_id), data=time)
@@ -230,7 +230,7 @@ async def expedition(update, context):
         planet.available_ships = 0
         db_sess.commit()
 
-        await update.message.reply_text('Корабли отправлены в экспедицию, вернутся через 15 минут',
+        await update.message.reply_text('Корабли отправлены в экспедицию, вернутся через 3 минуты',
                                         reply_markup=markup)
     except:
         pass
